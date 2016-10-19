@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import projects.kcluster.models.compositions.BFSData;
+import projects.kcluster.nodes.compositions.BFSComposition;
+import projects.kcluster.nodes.compositions.IComposition;
 import projects.kcluster.nodes.timers.SendTimer;
 import projects.kcluster.nodes.timers.StartTimer;
 import sinalgo.configuration.WrongConfigurationException;
@@ -16,6 +19,8 @@ public class KclusterNode extends Node {
 
 	/** List of compositions to use */
 	private LinkedList<IComposition> pCompositions;
+
+	private BFSData pBFSData;
 
 	@Override
 	public void checkRequirements() throws WrongConfigurationException {
@@ -32,8 +37,8 @@ public class KclusterNode extends Node {
 			for (IComposition wComposition : pCompositions) {
 				if (wComposition instanceof BFSComposition) {
 					BFSComposition wBFSComposition = (BFSComposition) wComposition;
-					wDistance = wBFSComposition.getDistance();
-					wParent = wBFSComposition.getParent();
+					wDistance = pBFSData.distance;
+					wParent = pBFSData.parent;
 				}
 			}
 			desc = String.format("%d : (%d, %d)", ID, wDistance, wParent);
@@ -90,13 +95,16 @@ public class KclusterNode extends Node {
 	 * Start the node
 	 */
 	public void start() {
-		/* Create Compositions and start them */
+		/* Create shared Data objects */
+		pBFSData = new BFSData();
+
+		/* Create Compositions */
 		pCompositions = new LinkedList<>();
-		pCompositions.add(new BFSComposition());
+		pCompositions.add(new BFSComposition(this, pBFSData));
 
 		/* Start all compositions */
 		for (IComposition wComposition : pCompositions) {
-			wComposition.start(this);
+			wComposition.start();
 		}
 
 		/* first call to send at 2 */

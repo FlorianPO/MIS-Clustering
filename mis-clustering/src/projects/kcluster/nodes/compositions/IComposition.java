@@ -1,6 +1,5 @@
-package projects.kcluster.nodes.nodeImplementations;
+package projects.kcluster.nodes.compositions;
 
-import sinalgo.nodes.Node;
 import sinalgo.nodes.messages.Message;
 
 public interface IComposition {
@@ -11,6 +10,6 @@ public interface IComposition {
 
 	public void send();
 
-	public void start(Node aNode);
+	public void start();
 
 }
