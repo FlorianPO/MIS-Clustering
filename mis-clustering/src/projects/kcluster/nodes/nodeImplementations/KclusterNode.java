@@ -5,8 +5,10 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 
 import projects.kcluster.models.compositions.BFSData;
+import projects.kcluster.models.compositions.MISTData;
 import projects.kcluster.nodes.compositions.BFSComposition;
 import projects.kcluster.nodes.compositions.IComposition;
+import projects.kcluster.nodes.compositions.MISTComposition;
 import projects.kcluster.nodes.timers.SendTimer;
 import projects.kcluster.nodes.timers.StartTimer;
 import sinalgo.configuration.WrongConfigurationException;
@@ -21,6 +23,8 @@ public class KclusterNode extends Node {
 	private LinkedList<IComposition> pCompositions;
 
 	private BFSData pBFSData;
+	private MISTData pMISTData;
+	// private CLRData pCLRData;
 
 	@Override
 	public void checkRequirements() throws WrongConfigurationException {
@@ -32,16 +36,7 @@ public class KclusterNode extends Node {
 
 		String desc;
 		if (pCompositions != null) {
-			int wDistance = 0;
-			int wParent = 0;
-			for (IComposition wComposition : pCompositions) {
-				if (wComposition instanceof BFSComposition) {
-					BFSComposition wBFSComposition = (BFSComposition) wComposition;
-					wDistance = pBFSData.distance;
-					wParent = pBFSData.parent;
-				}
-			}
-			desc = String.format("%d : (%d, %d)", ID, wDistance, wParent);
+			desc = String.format("%d : (%d, %d)", ID, pBFSData.distance, pBFSData.parent);
 		} else {
 			desc = String.format("%d", ID);
 		}
@@ -97,10 +92,14 @@ public class KclusterNode extends Node {
 	public void start() {
 		/* Create shared Data objects */
 		pBFSData = new BFSData();
+		pMISTData = new MISTData();
+		// pCLRData = new CLRData();
 
 		/* Create Compositions */
 		pCompositions = new LinkedList<>();
 		pCompositions.add(new BFSComposition(this, pBFSData));
+		pCompositions.add(new MISTComposition(this, pBFSData, pMISTData));
+		// pCompositions.add(new CLRComposition(this, pMISTData, pCLRData));
 
 		/* Start all compositions */
 		for (IComposition wComposition : pCompositions) {
