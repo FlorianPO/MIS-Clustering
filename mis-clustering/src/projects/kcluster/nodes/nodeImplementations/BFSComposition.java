@@ -15,16 +15,27 @@ public class BFSComposition implements IComposition {
 	private int pParent;
 
 	private void actions() {
-		if (rule1()) {
-			this.pDistance = minimumDistanceNeighborD() + 1;
-		} else if (rule2()) {
-			for (int wI = 0; wI < pDistanceNeighbors.length; wI++) {
-				if (pDistanceNeighbors[wI] == this.pDistance - 1) {
-					this.pParent = BasicNode.getVoisin(pNode, wI);
-					break;
+		// No action for Node 1
+		if (pNode.ID != 1) {
+			if (rule1()) {
+				this.pDistance = minimumDistanceNeighborD() + 1;
+			} else if (rule2()) {
+				for (int wI = 0; wI < pDistanceNeighbors.length; wI++) {
+					if (pDistanceNeighbors[wI] == this.pDistance - 1) {
+						this.pParent = BasicNode.getVoisin(pNode, wI);
+						break;
+					}
 				}
 			}
 		}
+	}
+
+	public int getDistance() {
+		return pDistance;
+	}
+
+	public int getParent() {
+		return pParent;
 	}
 
 	@Override
@@ -78,7 +89,7 @@ public class BFSComposition implements IComposition {
 
 		int wNumberNeighbors = BasicNode.nbNeighbors(pNode);
 		if (pNode.ID == 1) {
-			pParent = 1;
+			pParent = 0;
 			pDistance = 0;
 		} else {
 			int arc = (int) ((Math.random() * 10000) % wNumberNeighbors);

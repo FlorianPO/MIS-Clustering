@@ -24,8 +24,24 @@ public class KclusterNode extends Node {
 	@Override
 	public void draw(Graphics g, PositionTransformation pt, boolean highlight) {
 		this.setColor(Color.YELLOW);
-		String text = "" + this.ID;
-		super.drawNodeAsDiskWithText(g, pt, highlight, text, 20, Color.black);
+
+		String desc;
+		if (pCompositions != null) {
+			int wDistance = 0;
+			int wParent = 0;
+			for (IComposition wComposition : pCompositions) {
+				if (wComposition instanceof BFSComposition) {
+					BFSComposition wBFSComposition = (BFSComposition) wComposition;
+					wDistance = wBFSComposition.getDistance();
+					wParent = wBFSComposition.getParent();
+				}
+			}
+			desc = String.format("%d : (%d, %d)", ID, wDistance, wParent);
+		} else {
+			desc = String.format("%d", ID);
+		}
+
+		super.drawNodeAsDiskWithText(g, pt, highlight, desc, 20, Color.black);
 	}
 
 	@Override
