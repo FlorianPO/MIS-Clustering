@@ -29,6 +29,15 @@ public class KclusterNode extends Node {
 	private MISTData pMISTData;
 	// private CLRData pCLRData;
 
+	public KclusterNode() {
+		pCompositions = new LinkedList<>();
+
+		/* Create shared Data objects */
+		pBFSData = new BFSData();
+		pMISTData = new MISTData();
+		// pCLRData = new CLRData();
+	}
+
 	@Override
 	public void checkRequirements() throws WrongConfigurationException {
 	}
@@ -93,13 +102,7 @@ public class KclusterNode extends Node {
 	 * Start the node
 	 */
 	public void start() {
-		/* Create shared Data objects */
-		pBFSData = new BFSData();
-		pMISTData = new MISTData();
-		// pCLRData = new CLRData();
-
 		/* Create Compositions */
-		pCompositions = new LinkedList<>();
 		pCompositions.add(new BFSComposition(this, pBFSData));
 		pCompositions.add(new MISTComposition(this, pBFSData, pMISTData));
 		// pCompositions.add(new CLRComposition(this, pMISTData, pCLRData));
