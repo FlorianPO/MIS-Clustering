@@ -46,6 +46,11 @@ public class Logger<N extends Node, M extends Message> {
 		public _N getNode() {
 			return node;
 		}
+
+		@Override
+		public String toString() {
+			return node + " : " + message;
+		}
 	}
 
 	/**
@@ -64,6 +69,10 @@ public class Logger<N extends Node, M extends Message> {
 			this.sender = sender;
 			this.message = message;
 			this.receiver = receiver;
+
+			log_list = new ArrayList<>();
+			send_list = new ArrayList<>();
+			receive_list = new ArrayList<>();
 		}
 
 		public _M getMessage() {
@@ -77,10 +86,14 @@ public class Logger<N extends Node, M extends Message> {
 		public _N getSender() {
 			return sender;
 		}
+
+		@Override
+		public String toString() {
+			return sender + " -> " + message + " -> " + receiver;
+		}
 	}
 
 	private ArrayList<Transmission<N, M>> log_list;
-
 	private ArrayList<MSG<N, M>> send_list;
 	private ArrayList<MSG<N, M>> receive_list;
 	private String name;
@@ -122,18 +135,25 @@ public class Logger<N extends Node, M extends Message> {
 	}
 
 	public void resolve() {
-		if (send_list.size() > 0 && receive_list.size() > 0) { // Find matches
-			for (int i = 0; i < send_list.size(); i++) {
-				for (int j = 0; i < receive_list.size(); j++) {
-					if (send_list.get(i).getMessage() == receive_list.get(i).getMessage()) {
-						// Match found ! Create Transmission object
-						log_list.add(new Transmission<N, M>(send_list.get(i).getNode(), send_list.get(i).getMessage(),
-								receive_list.get(i).getNode()));
-						send_list.remove(i); // Remove in sender list
-						i--;
-						send_list.remove(j); // Remove in receiver list
-						j--;
-					}
+		Iterator<Logger<N, M>.MSG<N, M>> i_iter = send_list.iterator();
+		while (i_iter.hasNext()) {
+			Logger<N, M>.MSG<N, M> i = i_iter.next();
+
+			Iterator<Logger<N, M>.MSG<N, M>> j_iter = receive_list.iterator();
+			while (j_iter.hasNext()) {
+				Logger<N, M>.MSG<N, M> j = j_iter.next();
+
+				if (i.getMessage() == j.getMessage()) {
+					// Match found ! Create Transmission object
+					Transmission transmission = new Transmission<N, M>(i.getNode(), i.getMessage(), j.getNode());
+					log_list.add(transmission);
+
+					// Test
+					System.out.println(transmission);
+
+					i_iter.remove();
+					j_iter.remove();
+					break;
 				}
 			}
 		}

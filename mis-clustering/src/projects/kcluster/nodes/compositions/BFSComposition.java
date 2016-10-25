@@ -1,6 +1,7 @@
 package projects.kcluster.nodes.compositions;
 
 import projects.kcluster.models.compositions.BFSData;
+import projects.kcluster.nodes.logger.Logger;
 import projects.kcluster.nodes.messages.BFSMessage;
 import projects.kcluster.nodes.nodeImplementations.BasicNode;
 import projects.kcluster.nodes.random.Random;
@@ -9,6 +10,7 @@ import sinalgo.nodes.messages.Message;
 import sinalgo.tools.Tools;
 
 public class BFSComposition implements IComposition {
+	private static Logger<Node, BFSMessage> logger = new Logger<>("BFSLogger", true);
 
 	private Node pNode;
 
@@ -40,6 +42,8 @@ public class BFSComposition implements IComposition {
 		// on parcourt la liste de tous les messages reçus
 		if (aMessage instanceof BFSMessage) {
 			BFSMessage wMessageBFS = (BFSMessage) aMessage;
+			logger.logReceive(pNode, wMessageBFS);
+
 			pBFSData.distanceNeighbors[BasicNode.getIndex(pNode, wMessageBFS.ID)] = wMessageBFS.distance;
 			actions();
 		}
@@ -77,7 +81,9 @@ public class BFSComposition implements IComposition {
 
 	@Override
 	public void send() {
-		pNode.broadcast(new BFSMessage(pNode.ID, pBFSData.distance));
+		BFSMessage wMessageBFS = new BFSMessage(pNode.ID, pBFSData.distance);
+		logger.logSend(pNode, wMessageBFS);
+		pNode.broadcast(wMessageBFS);
 	}
 
 	@Override
