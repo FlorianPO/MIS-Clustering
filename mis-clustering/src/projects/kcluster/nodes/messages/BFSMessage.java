@@ -14,7 +14,6 @@ public class BFSMessage extends Message {
 		this.distance = distance;
 		cpt = BFS_cpt;
 		BFS_cpt++;
-		System.out.println("________" + cpt);
 	}
 
 	@Override

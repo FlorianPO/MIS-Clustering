@@ -56,6 +56,18 @@ public class KclusterNode extends Node {
 		super.drawNodeAsDiskWithText(g, pt, highlight, desc, 20, Color.black);
 	}
 
+	public BFSData getBFSData() {
+		return pBFSData;
+	}
+
+	public MISTData getMISTData() {
+		return pMISTData;
+	}
+
+	// public CLRData getCLRData() {
+	// return pCLRData;
+	//
+
 	@Override
 	public void handleMessages(Inbox inbox) {
 		while (inbox.hasNext()) {

@@ -148,9 +148,6 @@ public class Logger<N extends Node, M extends Message> {
 					Transmission transmission = new Transmission<N, M>(i.getNode(), i.getMessage(), j.getNode());
 					log_list.add(transmission);
 
-					// Test
-					System.out.println(transmission);
-
 					i_iter.remove();
 					j_iter.remove();
 					break;
