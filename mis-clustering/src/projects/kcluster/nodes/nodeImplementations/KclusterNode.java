@@ -44,7 +44,15 @@ public class KclusterNode extends Node {
 
 	@Override
 	public void draw(Graphics g, PositionTransformation pt, boolean highlight) {
-		this.setColor(Color.YELLOW);
+		if (this.ID == 0) {
+			this.setColor(Color.RED);
+		}
+
+		if (pMISTData.dominator == true) {
+			this.setColor(Color.RED);
+		} else {
+			this.setColor(Color.YELLOW);
+		}
 
 		String desc;
 		if (pCompositions != null) {

@@ -39,7 +39,7 @@ public class BFSComposition implements IComposition {
 
 	@Override
 	public void handleMessage(Message aMessage) {
-		// on parcourt la liste de tous les messages reçus
+		// Check the message of the type we are waiting
 		if (aMessage instanceof BFSMessage) {
 			BFSMessage wMessageBFS = (BFSMessage) aMessage;
 			logger.logReceive(pNode, wMessageBFS);
@@ -90,7 +90,7 @@ public class BFSComposition implements IComposition {
 	public void start() {
 		int wNumberNeighbors = BasicNode.nbNeighbors(pNode);
 		if (pNode.ID == 1) {
-			pBFSData.parent = 0;
+			pBFSData.parent = 1;
 			pBFSData.distance = 0;
 		} else {
 			int arc = Random.rand(wNumberNeighbors);
@@ -98,7 +98,6 @@ public class BFSComposition implements IComposition {
 			pBFSData.distance = Tools.getNodeList().size();
 		}
 		pBFSData.distanceNeighbors = new int[wNumberNeighbors];
-
 	}
 
 }

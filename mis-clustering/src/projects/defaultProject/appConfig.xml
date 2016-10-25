@@ -2,8 +2,8 @@
 <sinalgo>
 	<ProjectSelector windowWidth="800" windowHeight="600" lastChosenProject="kcluster" windowPosX="532" windowPosY="188" isMaximized="false" selectedTab="1" />
 	<GUI windowWidth="1909" windowHeight="1173" windowPosX="9" windowPosY="23" isMaximized="true" ControlPanelExpandSimulation="true" ControlPanelShowFullViewPanel="false" ControlPanelShowTextPanel="true" ControlPanelShowProjectControl="true" RunOperationIsLimited="false" helpWindowWidth="500" helpWindowHeight="500" helpWindowPosX="200" helpWindowPosY="200" helpWindowIsMaximized="false" />
-	<RandomSeed seedFromPreviousRun="-8159070284035444277" />
+	<RandomSeed seedFromPreviousRun="2453458274480550833" />
 	<App lastSelectedFileDirectory="/Users/gattazr/Documents/Cours/polytech/S9/AD/projet/mis-clustering/graphs/" checkForUpdatesAtStartup="false" updateCheckTimeStamp="0" runCmdLineArgs="" />
-	<GenNodesDlg numNodes="25" />
+	<GenNodesDlg numNodes="50" />
 </sinalgo>
 
