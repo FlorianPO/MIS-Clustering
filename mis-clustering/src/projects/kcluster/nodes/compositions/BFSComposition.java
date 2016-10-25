@@ -3,6 +3,7 @@ package projects.kcluster.nodes.compositions;
 import projects.kcluster.models.compositions.BFSData;
 import projects.kcluster.nodes.messages.BFSMessage;
 import projects.kcluster.nodes.nodeImplementations.BasicNode;
+import projects.kcluster.nodes.random.Random;
 import sinalgo.nodes.Node;
 import sinalgo.nodes.messages.Message;
 import sinalgo.tools.Tools;
@@ -86,7 +87,7 @@ public class BFSComposition implements IComposition {
 			pBFSData.parent = 0;
 			pBFSData.distance = 0;
 		} else {
-			int arc = (int) ((Math.random() * 10000) % wNumberNeighbors);
+			int arc = Random.rand(wNumberNeighbors);
 			pBFSData.parent = BasicNode.getVoisin(pNode, arc);
 			pBFSData.distance = Tools.getNodeList().size();
 		}

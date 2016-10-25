@@ -9,6 +9,7 @@ import projects.kcluster.models.compositions.MISTData;
 import projects.kcluster.nodes.compositions.BFSComposition;
 import projects.kcluster.nodes.compositions.IComposition;
 import projects.kcluster.nodes.compositions.MISTComposition;
+import projects.kcluster.nodes.random.Random;
 import projects.kcluster.nodes.timers.SendTimer;
 import projects.kcluster.nodes.timers.StartTimer;
 import sinalgo.configuration.WrongConfigurationException;
@@ -18,6 +19,8 @@ import sinalgo.nodes.messages.Inbox;
 import sinalgo.nodes.messages.Message;
 
 public class KclusterNode extends Node {
+	private static final int _rand_mean = 10;
+	private static final int _rand_variation = 5;
 
 	/** List of compositions to use */
 	private LinkedList<IComposition> pCompositions;
@@ -83,7 +86,7 @@ public class KclusterNode extends Node {
 		}
 
 		/* regular call to send */
-		(new SendTimer()).startRelative(15, this);
+		(new SendTimer()).startRelative(Random.randInterval(_rand_mean, _rand_variation), this);
 	}
 
 	/**
@@ -106,8 +109,8 @@ public class KclusterNode extends Node {
 			wComposition.start();
 		}
 
-		/* first call to send at 2 */
-		(new SendTimer()).startRelative(1, this);
+		/* first call to send */
+		(new SendTimer()).startRelative(Random.randInterval(_rand_mean, _rand_variation), this);
 	}
 
 }
