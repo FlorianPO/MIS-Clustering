@@ -5,8 +5,10 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 
 import projects.kcluster.models.compositions.BFSData;
+import projects.kcluster.models.compositions.CLRData;
 import projects.kcluster.models.compositions.MISTData;
 import projects.kcluster.nodes.compositions.BFSComposition;
+import projects.kcluster.nodes.compositions.CLRComposition;
 import projects.kcluster.nodes.compositions.IComposition;
 import projects.kcluster.nodes.compositions.MISTComposition;
 import projects.kcluster.nodes.random.Random;
@@ -27,7 +29,7 @@ public class KclusterNode extends Node {
 
 	private BFSData pBFSData;
 	private MISTData pMISTData;
-	// private CLRData pCLRData;
+	private CLRData pCLRData;
 
 	public KclusterNode() {
 		pCompositions = new LinkedList<>();
@@ -35,7 +37,7 @@ public class KclusterNode extends Node {
 		/* Create shared Data objects */
 		pBFSData = new BFSData();
 		pMISTData = new MISTData();
-		// pCLRData = new CLRData();
+		pCLRData = new CLRData();
 	}
 
 	@Override
@@ -62,13 +64,13 @@ public class KclusterNode extends Node {
 		return pBFSData;
 	}
 
+	public CLRData getCLRData() {
+		return pCLRData;
+	}
+
 	public MISTData getMISTData() {
 		return pMISTData;
 	}
-
-	// public CLRData getCLRData() {
-	// return pCLRData;
-	//
 
 	@Override
 	public void handleMessages(Inbox inbox) {
@@ -119,7 +121,7 @@ public class KclusterNode extends Node {
 		/* Create Compositions */
 		pCompositions.add(new BFSComposition(this, pBFSData));
 		pCompositions.add(new MISTComposition(this, pBFSData, pMISTData));
-		// pCompositions.add(new CLRComposition(this, pMISTData, pCLRData));
+		pCompositions.add(new CLRComposition(this, pMISTData, pCLRData));
 
 		/* Start all compositions */
 		for (IComposition wComposition : pCompositions) {

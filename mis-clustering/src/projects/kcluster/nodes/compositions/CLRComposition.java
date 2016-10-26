@@ -26,17 +26,52 @@ public class CLRComposition implements IComposition {
 	public void handleMessage(Message aMessage) {
 	}
 
-	private boolean isShort() {
+	private boolean macroIsClusterHead() {
+		// TODO
+		return false;
+	}
+
+	private boolean macroIsShort() {
 		return pCLRData.alpha < k;
 	}
 
-	private boolean isTall() {
+	private boolean macroIsTall() {
 		return pCLRData.alpha >= k;
+	}
+
+	private int macroMaxAShort() {
+		// TODO
+		return 0;
+	}
+
+	private int macroShortChildren() {
+		// TODO
+		return 0;
+	}
+
+	private int macroTallChildren() {
+		// TODO
+		return 0;
 	}
 
 	@Override
 	public void neighborhoodChange() {
 		// TODO
+	}
+
+	private boolean ruleSetAlpha() {
+		// TODO
+		return false;
+	}
+
+	private boolean ruleSetHead() {
+		// TODO
+		return false;
+	}
+
+	private boolean ruleSetParentCLR() {
+		// TODO
+		return false;
 	}
 
 	@Override
