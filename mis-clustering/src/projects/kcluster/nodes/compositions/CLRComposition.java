@@ -26,6 +26,14 @@ public class CLRComposition implements IComposition {
 	public void handleMessage(Message aMessage) {
 	}
 
+	private int macroAlpha() {
+		return 0;
+	}
+
+	private int macroHead() {
+		return 0;
+	}
+
 	private boolean macroIsClusterHead() {
 		// TODO
 		return false;
@@ -41,6 +49,18 @@ public class CLRComposition implements IComposition {
 
 	private int macroMaxAShort() {
 		// TODO
+		return 0;
+	}
+
+	private int macroMinATall() {
+		return 0;
+	}
+
+	private int macroMinIdMinATall() {
+		return 0;
+	}
+
+	private int macroParent() {
 		return 0;
 	}
 
