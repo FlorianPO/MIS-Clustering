@@ -1,6 +1,6 @@
 package projects.kcluster.nodes.messages;
 
-import projects.kcluster.models.compositions.MISTKey;
+import projects.kcluster.models.compositions.MISTData.MISTKey;
 import sinalgo.nodes.messages.Message;
 
 public class MISTMessage extends Message {

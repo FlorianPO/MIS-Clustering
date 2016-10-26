@@ -44,22 +44,16 @@ public class KclusterNode extends Node {
 
 	@Override
 	public void draw(Graphics g, PositionTransformation pt, boolean highlight) {
-		if (this.ID == 0) {
-			this.setColor(Color.RED);
-		}
-
 		if (pMISTData.dominator == true) {
-			this.setColor(Color.RED);
+			this.setColor(Color.BLUE);
 		} else {
 			this.setColor(Color.YELLOW);
 		}
-
-		String desc;
-		if (pCompositions != null) {
-			desc = String.format("%d : (%d, %d)", ID, pBFSData.distance, pBFSData.parent);
-		} else {
-			desc = String.format("%d", ID);
+		if (this.ID == 1) {
+			this.setColor(Color.RED);
 		}
+
+		String desc = String.format("%d", ID);
 
 		super.drawNodeAsDiskWithText(g, pt, highlight, desc, 20, Color.black);
 	}

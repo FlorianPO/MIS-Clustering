@@ -2,7 +2,7 @@ package projects.kcluster.nodes.compositions;
 
 import projects.kcluster.models.compositions.BFSData;
 import projects.kcluster.models.compositions.MISTData;
-import projects.kcluster.models.compositions.MISTKey;
+import projects.kcluster.models.compositions.MISTData.MISTKey;
 import projects.kcluster.nodes.messages.MISTMessage;
 import projects.kcluster.nodes.nodeImplementations.BasicNode;
 import projects.kcluster.nodes.random.Random;
@@ -74,7 +74,6 @@ public class MISTComposition implements IComposition {
 				}
 			}
 		}
-
 		return BasicNode.getVoisin(pNode, wMinIndex);
 	}
 
