@@ -6,6 +6,7 @@ import sinalgo.nodes.Node;
 import sinalgo.nodes.messages.Message;
 
 public class CLRComposition implements IComposition {
+	private static final int k = 3;
 
 	private Node pNode;
 
@@ -23,6 +24,14 @@ public class CLRComposition implements IComposition {
 
 	@Override
 	public void handleMessage(Message aMessage) {
+	}
+
+	private boolean isShort() {
+		return pCLRData.alpha < k;
+	}
+
+	private boolean isTall() {
+		return pCLRData.alpha >= k;
 	}
 
 	@Override
