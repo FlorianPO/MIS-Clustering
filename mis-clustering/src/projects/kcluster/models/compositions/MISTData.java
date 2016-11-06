@@ -44,8 +44,12 @@ public class MISTData {
 			} else if (this.ID > a.ID) {
 				return 1;
 			}
-
 			return 0;
+		}
+
+		@Override
+		public String toString() {
+			return String.format("[%s: ID=%d, level=%d]", getClass().getSimpleName(), ID, levelDFS);
 		}
 
 	}
