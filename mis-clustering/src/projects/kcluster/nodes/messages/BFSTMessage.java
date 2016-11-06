@@ -2,14 +2,14 @@ package projects.kcluster.nodes.messages;
 
 import sinalgo.nodes.messages.Message;
 
-public class BFSMessage extends Message {
+public class BFSTMessage extends Message {
 	private static int BFS_cpt = 0;
 
 	public int cpt;
 	public int distance;
 	public int ID;
 
-	public BFSMessage(int ID, int distance) {
+	public BFSTMessage(int ID, int distance) {
 		this.ID = ID;
 		this.distance = distance;
 		cpt = BFS_cpt;

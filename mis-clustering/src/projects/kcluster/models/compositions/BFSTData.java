@@ -3,7 +3,7 @@ package projects.kcluster.models.compositions;
 /**
  * Data manipulated by a node during the creation of a BFS tree
  */
-public class BFSData {
+public class BFSTData {
 
 	/** Id of Parent node in tree. 1 if root */
 	public int parent;

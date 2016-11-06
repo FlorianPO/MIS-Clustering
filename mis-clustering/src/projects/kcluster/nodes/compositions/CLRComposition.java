@@ -29,14 +29,25 @@ public class CLRComposition implements IComposition {
 	}
 
 	private void actions() {
+		boolean finished = true;
 		if (ruleSetAlpha()) {
 			pCLRData.alpha = macroAlpha();
-		} else if (ruleSetParentCLR()) {
+			finished = false;
+			System.out.println("no terminal" + sinalgo.runtime.Global.currentTime);
+		}
+		if (ruleSetParentCLR()) {
 			pCLRData.parent = macroParent();
-		} else if (ruleSetHead()) {
+			finished = false;
+			System.out.println("no terminal" + sinalgo.runtime.Global.currentTime);
+		}
+		if (ruleSetHead()) {
 			pCLRData.head = macroHead();
-		} else
+			finished = false;
+			System.out.println("no terminal" + sinalgo.runtime.Global.currentTime);
+		}
+		if (finished) {
 			System.out.println("Terminal configuration" + sinalgo.runtime.Global.currentTime);
+		}
 	}
 
 	@Override
@@ -63,6 +74,7 @@ public class CLRComposition implements IComposition {
 	private int macroHead() {
 		if (macroIsClusterHead())
 			return pNode.ID;
+		System.out.println("HERE" + pCLRData.parent);
 
 		return pCLRData.headNeighbors[BasicNode.getIndex(pNode, pCLRData.parent)];
 	}
@@ -154,7 +166,7 @@ public class CLRComposition implements IComposition {
 		List<Integer> result_list = new ArrayList<>();
 
 		for (int wI = 0; wI < pCLRData.alphaNeighbors.length; wI++) {
-			int voisinID = BasicNode.getVoisin(pNode, wI);
+			int voisinID = BasicNode.getNeighbor(pNode, wI);
 			if (pCLRData.parentPrevNeighbors[wI] == this.pNode.ID && macroIsShort(voisinID)) {
 				result_list.add(voisinID);
 			}
@@ -167,7 +179,7 @@ public class CLRComposition implements IComposition {
 		List<Integer> result_list = new ArrayList<>();
 
 		for (int wI = 0; wI < pCLRData.alphaNeighbors.length; wI++) {
-			int voisinID = BasicNode.getVoisin(pNode, wI);
+			int voisinID = BasicNode.getNeighbor(pNode, wI);
 			if (pCLRData.parentPrevNeighbors[wI] == this.pNode.ID && macroIsTall(voisinID)) {
 				result_list.add(voisinID);
 			}
@@ -186,6 +198,7 @@ public class CLRComposition implements IComposition {
 	}
 
 	private boolean ruleSetHead() {
+		System.out.println("JUST BEFORE");
 		return !ruleSetAlpha() && pCLRData.parent == macroParent() && pCLRData.head != macroHead();
 	}
 
@@ -213,7 +226,6 @@ public class CLRComposition implements IComposition {
 			pCLRData.parentPrevNeighbors[wI] = Random.rand(0);
 			pCLRData.headNeighbors[wI] = Random.rand(0);
 		}
-
 		pCLRData.alpha = Random.rand(2 * k);
 		pCLRData.head = Random.rand(0);
 		pCLRData.parent = Random.rand(0);

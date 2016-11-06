@@ -1,6 +1,6 @@
 package projects.kcluster.nodes.compositions;
 
-import projects.kcluster.models.compositions.BFSData;
+import projects.kcluster.models.compositions.BFSTData;
 import projects.kcluster.models.compositions.MISTData;
 import projects.kcluster.models.compositions.MISTData.MISTKey;
 import projects.kcluster.nodes.logger.Logger;
@@ -23,7 +23,7 @@ public class MISTComposition implements IComposition {
 	private Node pNode;
 
 	/** BFS Data handed to composition (must be read only) */
-	private BFSData pBFSData;
+	private BFSTData pBFSData;
 	/** MIST Data manipulated */
 	private MISTData pMISTData;
 
@@ -38,7 +38,7 @@ public class MISTComposition implements IComposition {
 	 *            Data to manipulate. This object will be modified by this class
 	 *
 	 */
-	public MISTComposition(Node aNode, BFSData aBFSData, MISTData aMISTData) {
+	public MISTComposition(Node aNode, BFSTData aBFSData, MISTData aMISTData) {
 		pNode = aNode;
 		pBFSData = aBFSData;
 		pMISTData = aMISTData;

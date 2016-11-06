@@ -1,8 +1,8 @@
 package projects.kcluster.nodes.compositions;
 
-import projects.kcluster.models.compositions.BFSData;
+import projects.kcluster.models.compositions.BFSTData;
 import projects.kcluster.nodes.logger.Logger;
-import projects.kcluster.nodes.messages.BFSMessage;
+import projects.kcluster.nodes.messages.BFSTMessage;
 import projects.kcluster.nodes.nodeImplementations.BasicNode;
 import projects.kcluster.nodes.random.Random;
 import sinalgo.nodes.Node;
@@ -13,15 +13,15 @@ import sinalgo.tools.Tools;
  * Composition to create a BFS Tree
  *
  */
-public class BFSComposition implements IComposition {
+public class BFSTComposition implements IComposition {
 	/* Logger */
-	private static Logger<Node, BFSMessage> LOGGER = new Logger<>("BFSTLogger", false);
+	private static Logger<Node, BFSTMessage> LOGGER = new Logger<>("BFSTLogger", false);
 
 	/** Node on which this composition is attached */
 	private Node pNode;
 
 	/** BFS Data manipulated */
-	private BFSData pBFSData;
+	private BFSTData pBFSData;
 
 	/**
 	 *
@@ -31,7 +31,7 @@ public class BFSComposition implements IComposition {
 	 *            Data to manipulate. This object will be modified by this class
 	 *
 	 */
-	public BFSComposition(Node aNode, BFSData aBFSData) {
+	public BFSTComposition(Node aNode, BFSTData aBFSData) {
 		pNode = aNode;
 		pBFSData = aBFSData;
 	}
@@ -62,8 +62,8 @@ public class BFSComposition implements IComposition {
 	@Override
 	public void handleMessage(Message aMessage) {
 		// Check the type of the message
-		if (aMessage instanceof BFSMessage) {
-			BFSMessage wMessageBFS = (BFSMessage) aMessage;
+		if (aMessage instanceof BFSTMessage) {
+			BFSTMessage wMessageBFS = (BFSTMessage) aMessage;
 			LOGGER.logReceive(pNode, wMessageBFS);
 
 			// Update known data with received one
@@ -128,7 +128,7 @@ public class BFSComposition implements IComposition {
 
 	@Override
 	public void send() {
-		BFSMessage wMessageBFS = new BFSMessage(pNode.ID, pBFSData.distance);
+		BFSTMessage wMessageBFS = new BFSTMessage(pNode.ID, pBFSData.distance);
 		LOGGER.logSend(pNode, wMessageBFS);
 		pNode.broadcast(wMessageBFS);
 	}

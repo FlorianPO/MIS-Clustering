@@ -15,7 +15,7 @@ import sinalgo.nodes.edges.BidirectionalEdge;
 /**
  * Edge used to show BFS Tree in sinalgo
  */
-public class BFSEdge extends BidirectionalEdge {
+public class BFSTEdge extends BidirectionalEdge {
 	@Override
 	public void draw(Graphics g, PositionTransformation pt) {
 		Position p1 = startNode.getPosition();

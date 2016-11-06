@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
-import projects.kcluster.models.compositions.BFSData;
+import projects.kcluster.models.compositions.BFSTData;
 import projects.kcluster.models.compositions.CLRData;
 import projects.kcluster.models.compositions.MISTData;
-import projects.kcluster.nodes.compositions.BFSComposition;
+import projects.kcluster.nodes.compositions.BFSTComposition;
 import projects.kcluster.nodes.compositions.IComposition;
 import projects.kcluster.nodes.compositions.MISTComposition;
 import projects.kcluster.nodes.random.Random;
@@ -27,7 +27,7 @@ public class KclusterNode extends Node {
 	private LinkedList<IComposition> pCompositions;
 
 	/** BFST Data used in compositions */
-	private BFSData pBFSData;
+	private BFSTData pBFSData;
 	/** MIST Data used in compositions */
 	private MISTData pMISTData;
 	/** CLR Data used in compositions */
@@ -37,7 +37,7 @@ public class KclusterNode extends Node {
 		pCompositions = new LinkedList<>();
 
 		/* Create shared Data objects */
-		pBFSData = new BFSData();
+		pBFSData = new BFSTData();
 		pMISTData = new MISTData();
 		pCLRData = new CLRData();
 	}
@@ -67,7 +67,7 @@ public class KclusterNode extends Node {
 	 *
 	 * @return BFST Data
 	 */
-	public BFSData getBFSData() {
+	public BFSTData getBFSData() {
 		return pBFSData;
 	}
 
@@ -137,7 +137,7 @@ public class KclusterNode extends Node {
 	 */
 	public void start() {
 		/* Create Compositions */
-		pCompositions.add(new BFSComposition(this, pBFSData));
+		pCompositions.add(new BFSTComposition(this, pBFSData));
 		pCompositions.add(new MISTComposition(this, pBFSData, pMISTData));
 		// pCompositions.add(new CLRComposition(this, pMISTData, pCLRData));
 
