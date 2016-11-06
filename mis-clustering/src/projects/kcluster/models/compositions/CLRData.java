@@ -1,5 +1,8 @@
 package projects.kcluster.models.compositions;
 
+/**
+ * Data manipulated by a node during the creation of CLR clusters
+ */
 public class CLRData {
 	public int parent;
 

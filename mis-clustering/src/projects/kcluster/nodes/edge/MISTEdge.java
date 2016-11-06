@@ -12,6 +12,9 @@ import sinalgo.gui.transformation.PositionTransformation;
 import sinalgo.nodes.Position;
 import sinalgo.nodes.edges.BidirectionalEdge;
 
+/**
+ * Edge used to show MIS Tree in sinalgo
+ */
 public class MISTEdge extends BidirectionalEdge {
 	@Override
 	public void draw(Graphics g, PositionTransformation pt) {

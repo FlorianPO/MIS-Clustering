@@ -8,14 +8,15 @@ import sinalgo.nodes.edges.Edge;
 public class BasicNode {
 
 	/**
-	 * Retourne le numéro du canal permettant de communiquer avec le noeud
-	 * d'identifiant ID. Si le noeud n'est pas trouvé dans les voisin du noeud,
-	 * la fonction retourne -1
+	 * Return the index in the outgoingConnections collection of the canal used
+	 * by the Node aNode to communicate with the Node identified by aId. Return
+	 * -1 if no direct canal exist
 	 *
 	 * @param aNode
+	 *            Node
 	 * @param aID
-	 *            identifiant du noeud
-	 * @return
+	 *            id
+	 * @return the index of the canal to use in outgoingConnections or -1
 	 */
 	public static int getIndex(Node aNode, int aID) {
 		int j = 0;
@@ -29,25 +30,29 @@ public class BasicNode {
 	}
 
 	/**
-	 * Retourne l'identifiant du noeud connecté au canal 'indice‘ du noeud. Si
-	 * l'indice n'existe pas, la fonction retourne -1
+	 * Return the id of the Node directly reachable through the canal at the
+	 * index aIndex in the outgoingConnections collection of the Node aNode. If
+	 * the canal does not exist, return )1
 	 *
 	 * @param aNode
-	 * @param aIndice
-	 * @return identifiant du noeud.
+	 *            Node
+	 * @param aIndex
+	 *            index
+	 * @return id of the found node or -1
 	 */
-	public static int getVoisin(Node aNode, int aIndice) {
-		if (aIndice >= aNode.outgoingConnections.size() || aIndice < 0) {
+	public static int getNeighbor(Node aNode, int aIndex) {
+		if (aIndex >= aNode.outgoingConnections.size() || aIndex < 0) {
 			return -1;
 		}
 		Iterator<Edge> iter = aNode.outgoingConnections.iterator();
-		for (int j = 0; j < aIndice; j++) {
+		for (int j = 0; j < aIndex; j++) {
 			iter.next();
 		}
 		return iter.next().endNode.ID;
 	}
 
 	/**
+	 * Return the number of neighbors
 	 *
 	 * @param aNode
 	 * @return Number of neighbors

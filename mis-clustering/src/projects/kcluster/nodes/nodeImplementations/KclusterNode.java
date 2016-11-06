@@ -8,7 +8,6 @@ import projects.kcluster.models.compositions.BFSData;
 import projects.kcluster.models.compositions.CLRData;
 import projects.kcluster.models.compositions.MISTData;
 import projects.kcluster.nodes.compositions.BFSComposition;
-import projects.kcluster.nodes.compositions.CLRComposition;
 import projects.kcluster.nodes.compositions.IComposition;
 import projects.kcluster.nodes.compositions.MISTComposition;
 import projects.kcluster.nodes.random.Random;
@@ -27,8 +26,11 @@ public class KclusterNode extends Node {
 	/** List of compositions to use */
 	private LinkedList<IComposition> pCompositions;
 
+	/** BFST Data used in compositions */
 	private BFSData pBFSData;
+	/** MIST Data used in compositions */
 	private MISTData pMISTData;
+	/** CLR Data used in compositions */
 	private CLRData pCLRData;
 
 	public KclusterNode() {
@@ -60,14 +62,29 @@ public class KclusterNode extends Node {
 		super.drawNodeAsDiskWithText(g, pt, highlight, desc, 20, Color.black);
 	}
 
+	/**
+	 * Return the BFST Data used in the Node compositions
+	 *
+	 * @return BFST Data
+	 */
 	public BFSData getBFSData() {
 		return pBFSData;
 	}
 
+	/**
+	 * Return the CLR Data used in the Node compositions
+	 *
+	 * @return CLR Data
+	 */
 	public CLRData getCLRData() {
 		return pCLRData;
 	}
 
+	/**
+	 * Return the MIST Data used in the Node compositions
+	 *
+	 * @return MIST Data
+	 */
 	public MISTData getMISTData() {
 		return pMISTData;
 	}
@@ -103,7 +120,8 @@ public class KclusterNode extends Node {
 	}
 
 	/**
-	 * Send a message
+	 * Send messages regularly to inform neighbors of the current state of the
+	 * Node
 	 */
 	public void send() {
 		for (IComposition wComposition : pCompositions) {
@@ -121,7 +139,7 @@ public class KclusterNode extends Node {
 		/* Create Compositions */
 		pCompositions.add(new BFSComposition(this, pBFSData));
 		pCompositions.add(new MISTComposition(this, pBFSData, pMISTData));
-		pCompositions.add(new CLRComposition(this, pMISTData, pCLRData));
+		// pCompositions.add(new CLRComposition(this, pMISTData, pCLRData));
 
 		/* Start all compositions */
 		for (IComposition wComposition : pCompositions) {
