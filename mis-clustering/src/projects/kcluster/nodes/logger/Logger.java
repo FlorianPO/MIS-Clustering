@@ -57,7 +57,7 @@ public class Logger<N extends Node, M extends Message> {
 	 * @param <_N>
 	 * @param <_M>
 	 */
-	private class MSGReceived<_N extends Node, _M extends Message> extends MSG {
+	private class MSGReceived<_N extends Node, _M extends Message> extends MSG<_N, _M> {
 		public MSGReceived(_N node, _M message) {
 			super(node, message);
 		}
@@ -74,7 +74,7 @@ public class Logger<N extends Node, M extends Message> {
 	 * @param <_N>
 	 * @param <_M>
 	 */
-	private class MSGSent<_N extends Node, _M extends Message> extends MSG {
+	private class MSGSent<_N extends Node, _M extends Message> extends MSG<_N, _M> {
 		private static final int TTL = 50;
 		private int ttl;
 
@@ -101,22 +101,14 @@ public class Logger<N extends Node, M extends Message> {
 	 * @param <_M>
 	 */
 	private class Transmission {
-		private MSGSent sender;
-		private MSGReceived receiver;
+		private MSGSent<N, M> sender;
+		private MSGReceived<N, M> receiver;
 
-		public Transmission(MSGSent sender, MSGReceived receiver) {
+		public Transmission(MSGSent<N, M> sender, MSGReceived<N, M> receiver) {
 			this.sender = sender;
 			this.receiver = receiver;
 			if (echo)
 				System.out.println(this);
-		}
-
-		public MSGReceived getReceiver() {
-			return receiver;
-		}
-
-		public MSGSent getSender() {
-			return sender;
 		}
 
 		@Override
