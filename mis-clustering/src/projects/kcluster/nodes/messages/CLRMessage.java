@@ -3,17 +3,23 @@ package projects.kcluster.nodes.messages;
 import sinalgo.nodes.messages.Message;
 
 public class CLRMessage extends Message {
+	private static int CLR_cpt = 0;
 
 	public int ID;
+	public int messageID;
 	public int alpha;
 	public int head;
-	public int prev_parent;
+	public int parent;
+	public int parent_head;
 
-	public CLRMessage(int ID, int alpha, int head, int prev_parent) {
+	public CLRMessage(int ID, int alpha, int head, int prev_parent, int parent_head) {
 		this.ID = ID;
 		this.alpha = alpha;
 		this.head = head;
-		this.prev_parent = prev_parent;
+		this.parent = prev_parent;
+		this.parent_head = parent_head;
+
+		messageID = ++CLR_cpt;
 	}
 
 	@Override
@@ -21,4 +27,9 @@ public class CLRMessage extends Message {
 		return this;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("[%s: mid=%d, ID=%d, dominator=%d, alpha=%s, head=%s, prev_parent=%s]",
+				getClass().getSimpleName(), messageID, ID, alpha, head, parent);
+	}
 }

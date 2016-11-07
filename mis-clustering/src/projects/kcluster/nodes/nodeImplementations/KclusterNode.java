@@ -8,6 +8,7 @@ import projects.kcluster.models.compositions.BFSTData;
 import projects.kcluster.models.compositions.CLRData;
 import projects.kcluster.models.compositions.MISTData;
 import projects.kcluster.nodes.compositions.BFSTComposition;
+import projects.kcluster.nodes.compositions.CLRComposition;
 import projects.kcluster.nodes.compositions.IComposition;
 import projects.kcluster.nodes.compositions.MISTComposition;
 import projects.kcluster.nodes.random.Random;
@@ -139,7 +140,7 @@ public class KclusterNode extends Node {
 		/* Create Compositions */
 		pCompositions.add(new BFSTComposition(this, pBFSData));
 		pCompositions.add(new MISTComposition(this, pBFSData, pMISTData));
-		// pCompositions.add(new CLRComposition(this, pMISTData, pCLRData));
+		pCompositions.add(new CLRComposition(this, pMISTData, pCLRData));
 
 		/* Start all compositions */
 		for (IComposition wComposition : pCompositions) {

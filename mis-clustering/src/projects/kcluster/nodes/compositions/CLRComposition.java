@@ -37,6 +37,12 @@ public class CLRComposition implements IComposition {
 		}
 		if (ruleSetParentCLR()) {
 			pCLRData.parent = macroParent();
+			// Here
+			if (pCLRData.parent == pNode.ID)
+				pCLRData.parent_head = pCLRData.head;
+			else
+				pCLRData.parent_head = pCLRData.parentHeadNeighbors[BasicNode.getIndex(pNode, pCLRData.parent)];
+			//
 			finished = false;
 			System.out.println("no terminal" + sinalgo.runtime.Global.currentTime);
 		}
@@ -46,7 +52,7 @@ public class CLRComposition implements IComposition {
 			System.out.println("no terminal" + sinalgo.runtime.Global.currentTime);
 		}
 		if (finished) {
-			System.out.println("Terminal configuration" + sinalgo.runtime.Global.currentTime);
+			System.out.println("Terminal configuration " + sinalgo.runtime.Global.currentTime + " for " + pNode);
 		}
 	}
 
@@ -59,7 +65,8 @@ public class CLRComposition implements IComposition {
 			int index = BasicNode.getIndex(pNode, wMessageCLR.ID);
 			pCLRData.alphaNeighbors[index] = wMessageCLR.alpha;
 			pCLRData.headNeighbors[index] = wMessageCLR.head;
-			pCLRData.parentPrevNeighbors[index] = wMessageCLR.prev_parent;
+			pCLRData.parentPrevNeighbors[index] = wMessageCLR.parent;
+			pCLRData.parentHeadNeighbors[index] = wMessageCLR.parent_head;
 
 			actions();
 		}
@@ -76,7 +83,7 @@ public class CLRComposition implements IComposition {
 			return pNode.ID;
 		System.out.println("HERE" + pCLRData.parent);
 
-		return pCLRData.headNeighbors[BasicNode.getIndex(pNode, pCLRData.parent)];
+		return pCLRData.parent_head;
 	}
 
 	private boolean macroIsClusterHead() {
@@ -208,7 +215,8 @@ public class CLRComposition implements IComposition {
 
 	@Override
 	public void send() {
-		CLRMessage wMessageCLR = new CLRMessage(pNode.ID, pCLRData.alpha, pCLRData.head, pMISTData.parent);
+		CLRMessage wMessageCLR = new CLRMessage(pNode.ID, pCLRData.alpha, pCLRData.head, pMISTData.parent,
+				pCLRData.parent_head);
 		logger.logSend(pNode, wMessageCLR);
 		pNode.broadcast(wMessageCLR);
 	}
@@ -220,15 +228,18 @@ public class CLRComposition implements IComposition {
 		pCLRData.alphaNeighbors = new int[wNumberNeighbors];
 		pCLRData.parentPrevNeighbors = new int[wNumberNeighbors];
 		pCLRData.headNeighbors = new int[wNumberNeighbors];
+		pCLRData.parentHeadNeighbors = new int[wNumberNeighbors];
 
 		for (int wI = 0; wI < pMISTData.neighborsKey.length; wI++) {
 			pCLRData.alphaNeighbors[wI] = Random.rand(2 * k);
 			pCLRData.parentPrevNeighbors[wI] = Random.rand(0);
 			pCLRData.headNeighbors[wI] = Random.rand(0);
+			pCLRData.parentHeadNeighbors[wI] = Random.rand(0);
 		}
 		pCLRData.alpha = Random.rand(2 * k);
 		pCLRData.head = Random.rand(0);
 		pCLRData.parent = Random.rand(0);
+		pCLRData.parent_head = Random.rand(0);
 	}
 
 }
