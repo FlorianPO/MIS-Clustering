@@ -35,7 +35,7 @@
 		<canReceiveWhileSending value="true" />
 
 		<!--The default type of edges to be used-->
-		<edgeType value="projects.kcluster.nodes.edge.MISTEdge" />
+		<edgeType value="projects.kcluster.nodes.edge.CLREdge" />
 
 		<!--If set to true, the application exits as soon as the termination criteria is met. This flag only affects the GUI mode.-->
 		<exitOnTerminationInGUI value="false" />
@@ -80,7 +80,7 @@
 		<extendedControl value="true" />
 
 		<!--If true, the graph edges are drawn as directed arrows,  otherwise simple lines.-->
-		<drawArrows value="false" />
+		<drawArrows value="true" />
 
 		<!--Fraction of the old and new zoom values for a zoom step.-->
 		<zoomStep value="1.2" />
@@ -181,28 +181,27 @@
 	</Framework>
 	<Custom>
 		<LossyDelivery DropRate="0"/>
-<RandomMessageTransmission distribution="Uniform" min="1" max="20"/>
+		<RandomMessageTransmission distribution="Uniform" min="1" max="20"/>
 	
-<Node defaultSize="20" />
+		<Node defaultSize="20" />
 
-<GeometricNodeCollection rMax="250"/>
+		<GeometricNodeCollection rMax="250"/>
 
-<UDG rMax="250"/>
+		<UDG rMax="150"/>
 
-<SINR alpha="2" beta="0.7" noise="0"/>
+		<SINR alpha="2" beta="0.7" noise="0"/>
 
-<RandomWayPoint>
-	<Speed distribution="Gaussian" mean="10" variance="20" />
-	<WaitingTime distribution="Poisson" lambda="10" />
-</RandomWayPoint>
+		<RandomWayPoint>
+			<Speed distribution="Gaussian" mean="10" variance="20" />
+			<WaitingTime distribution="Poisson" lambda="10" />
+		</RandomWayPoint>
 
-<RandomDirection>
-	<NodeSpeed distribution="Gaussian" mean="10" variance="20" />
-	<WaitingTime distribution="Poisson" lambda="10" />
-	<MoveTime distribution="Uniform" min="5" max="20" />
-</RandomDirection>
+		<RandomDirection>
+			<NodeSpeed distribution="Gaussian" mean="10" variance="20" />
+			<WaitingTime distribution="Poisson" lambda="10" />
+			<MoveTime distribution="Uniform" min="5" max="20" />
+		</RandomDirection>
 
-<QUDG rMin="30" rMax="50" ProbabilityType="constant" connectionProbability="0.6"/>
-		</Custom>
+		<QUDG rMin="30" rMax="50" ProbabilityType="constant" connectionProbability="0.6"/>
+	</Custom>
 </Document>
-

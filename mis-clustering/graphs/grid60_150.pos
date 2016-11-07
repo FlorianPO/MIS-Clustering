@@ -1,0 +1,184 @@
+Number of nodes: 60
+
+------------------------------------------------------
+General Config
+------------------------------------------------------
+Command Line arguments: -project kcluster 
+Java VM arguments: -Xmx500m 
+Class path: binaries/bin:binaries/jdom.jar
+------------------------------------------------------
+Configuration settings
+------------------------------------------------------
+ Simulation Area
+    dimensions = 2
+    dimX = 1000
+    dimY = 1000
+    dimZ = 500
+ Simulation
+    asynchronousMode = false
+    mobility = false
+    interference = false
+    interferenceIsAdditive = true
+    canReceiveWhileSending = true
+    canReceiveMultiplePacketsInParallel = true
+    edgeType = projects.kcluster.nodes.edge.CLREdge
+    exitOnTerminationInGUI = false
+    initializeConnectionsOnStartup = true
+    refreshRate = 1
+    generateNAckMessages = false
+    handleEmptyEventQueue = true
+    javaCmd = java
+    javaVMmaxMem = 500
+ Random number generators
+    useSameSeedAsInPreviousRun = false
+    useFixedSeed = false
+    fixedSeed = -2907338641268988060
+ Logging
+    logFileName = logfile.txt
+    outputToConsole = true
+    logToTimeDirectory = true
+    logConfiguration = true
+    eagerFlush = false
+ GUI
+    extendedControl = true
+    drawArrows = true
+    zoomStep = 1.2
+    wheelZoomStep = 1.05
+    minZoomFactor = 0.05
+    draw3DGraphNodesInProperOrder = true
+    usePerspectiveView = true
+    perspectiveViewDistance = 40
+ Background map in 2D
+    useMap = false
+    map = images/map.jpg
+ Models
+    DefaultMessageTransmissionModel = RandomTime
+    DefaultConnectivityModel = UDG
+    DefaultDistributionModel = Grid2D
+    DefaultInterferenceModel = NoInterference
+    DefaultMobilityModel = NoMobility
+    DefaultReliabilityModel = LossyDelivery
+    DefaultNodeImplementation = kcluster:KclusterNode
+    showModelsOfAllProjects = false
+ Node storage, position transformation
+    guiPositionTransformation2D = sinalgo.gui.transformation.Transformation2D
+    guiPositionTransformation3D = sinalgo.gui.transformation.Transformation3D
+    nodeCollection2D = sinalgo.runtime.nodeCollection.Geometric2DNodeCollection
+    nodeCollection3D = sinalgo.runtime.nodeCollection.Geometric3DNodeCollection
+ Export Settings
+    epsToPdfCommand = epstopdf %s
+    epsDrawDeploymentAreaBoundingBox = true
+    epsDrawBackgroundWhite = true
+ Animation Settings
+    showMessageAnimations = false
+    messageAnimationEnvelopeWidth = 30.0
+    messageAnimationEnvelopeHeight = 20.0
+    messageAnimationEnvelopeColor = r=255,g=255,b=0
+ Diverse Settings
+    showOptimizationHints = true
+    drawEdges = true
+    drawNodes = true
+    shownEventQueueSize = 10
+    outputTextFieldHeight = 200
+    arrowLength = 8
+    arrowWidth = 1
+    defaultRoundNumber = 1
+------------------------------------------------------
+Custom settings
+------------------------------------------------------
+ geometricnodecollection/rmax = 250
+ lossydelivery/droprate = 0
+ node/defaultsize = 20
+ qudg/connectionprobability = 0.6
+ qudg/probabilitytype = constant
+ qudg/rmax = 50
+ qudg/rmin = 30
+ randomdirection/movetime/distribution = Uniform
+ randomdirection/movetime/max = 20
+ randomdirection/movetime/min = 5
+ randomdirection/nodespeed/distribution = Gaussian
+ randomdirection/nodespeed/mean = 10
+ randomdirection/nodespeed/variance = 20
+ randomdirection/waitingtime/distribution = Poisson
+ randomdirection/waitingtime/lambda = 10
+ randommessagetransmission/distribution = Uniform
+ randommessagetransmission/max = 20
+ randommessagetransmission/min = 1
+ randomwaypoint/speed/distribution = Gaussian
+ randomwaypoint/speed/mean = 10
+ randomwaypoint/speed/variance = 20
+ randomwaypoint/waitingtime/distribution = Poisson
+ randomwaypoint/waitingtime/lambda = 10
+ sinr/alpha = 2
+ sinr/beta = 0.7
+ sinr/noise = 0
+ udg/rmax = 150
+------------------------------------------------------
+Seed for Random Number Generators
+------------------------------------------------------
+ Randomly selected seed: -2907338641268988060
+------------------------------------------------------
+End of settings
+------------------------------------------------------
+
+#####----- start of node posiitons -----#####
+114.33841851550567, 114.33841851550567, 0.0
+228.67683703101133, 114.33841851550567, 0.0
+343.015255546517, 114.33841851550567, 0.0
+457.35367406202266, 114.33841851550567, 0.0
+571.6920925775283, 114.33841851550567, 0.0
+686.030511093034, 114.33841851550567, 0.0
+800.3689296085397, 114.33841851550567, 0.0
+914.7073481240453, 114.33841851550567, 0.0
+114.33841851550567, 228.67683703101133, 0.0
+228.67683703101133, 228.67683703101133, 0.0
+343.015255546517, 228.67683703101133, 0.0
+457.35367406202266, 228.67683703101133, 0.0
+571.6920925775283, 228.67683703101133, 0.0
+686.030511093034, 228.67683703101133, 0.0
+800.3689296085397, 228.67683703101133, 0.0
+914.7073481240453, 228.67683703101133, 0.0
+114.33841851550567, 343.015255546517, 0.0
+228.67683703101133, 343.015255546517, 0.0
+343.015255546517, 343.015255546517, 0.0
+457.35367406202266, 343.015255546517, 0.0
+571.6920925775283, 343.015255546517, 0.0
+686.030511093034, 343.015255546517, 0.0
+800.3689296085397, 343.015255546517, 0.0
+914.7073481240453, 343.015255546517, 0.0
+114.33841851550567, 457.35367406202266, 0.0
+228.67683703101133, 457.35367406202266, 0.0
+343.015255546517, 457.35367406202266, 0.0
+457.35367406202266, 457.35367406202266, 0.0
+571.6920925775283, 457.35367406202266, 0.0
+686.030511093034, 457.35367406202266, 0.0
+800.3689296085397, 457.35367406202266, 0.0
+914.7073481240453, 457.35367406202266, 0.0
+114.33841851550567, 571.6920925775283, 0.0
+228.67683703101133, 571.6920925775283, 0.0
+343.015255546517, 571.6920925775283, 0.0
+457.35367406202266, 571.6920925775283, 0.0
+571.6920925775283, 571.6920925775283, 0.0
+686.030511093034, 571.6920925775283, 0.0
+800.3689296085397, 571.6920925775283, 0.0
+914.7073481240453, 571.6920925775283, 0.0
+114.33841851550567, 686.030511093034, 0.0
+228.67683703101133, 686.030511093034, 0.0
+343.015255546517, 686.030511093034, 0.0
+457.35367406202266, 686.030511093034, 0.0
+571.6920925775283, 686.030511093034, 0.0
+686.030511093034, 686.030511093034, 0.0
+800.3689296085397, 686.030511093034, 0.0
+914.7073481240453, 686.030511093034, 0.0
+114.33841851550567, 800.3689296085397, 0.0
+228.67683703101133, 800.3689296085397, 0.0
+343.015255546517, 800.3689296085397, 0.0
+457.35367406202266, 800.3689296085397, 0.0
+571.6920925775283, 800.3689296085397, 0.0
+686.030511093034, 800.3689296085397, 0.0
+800.3689296085397, 800.3689296085397, 0.0
+914.7073481240453, 800.3689296085397, 0.0
+114.33841851550567, 914.7073481240453, 0.0
+228.67683703101133, 914.7073481240453, 0.0
+343.015255546517, 914.7073481240453, 0.0
+457.35367406202266, 914.7073481240453, 0.0

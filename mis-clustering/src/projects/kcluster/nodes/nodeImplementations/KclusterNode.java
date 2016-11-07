@@ -49,16 +49,13 @@ public class KclusterNode extends Node {
 
 	@Override
 	public void draw(Graphics g, PositionTransformation pt, boolean highlight) {
-		if (pMISTData.dominator == true) {
-			this.setColor(Color.BLUE);
+		if (pCLRData.parent == ID) {
+			this.setColor(Color.RED);
 		} else {
 			this.setColor(Color.YELLOW);
 		}
-		if (this.ID == 1) {
-			this.setColor(Color.RED);
-		}
 
-		String desc = String.format("%d", ID);
+		String desc = String.format("%d", pCLRData.alpha);
 
 		super.drawNodeAsDiskWithText(g, pt, highlight, desc, 20, Color.black);
 	}
