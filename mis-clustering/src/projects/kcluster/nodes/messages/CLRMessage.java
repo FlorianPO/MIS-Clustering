@@ -29,7 +29,7 @@ public class CLRMessage extends Message {
 
 	@Override
 	public String toString() {
-		return String.format("[%s: mid=%d, ID=%d, dominator=%d, alpha=%s, head=%d, prev_parent=%d, parent_head=%d]",
+		return String.format("[%s: mid=%d, ID=%d, alpha=%s, head=%d, prev_parent=%d, parent_head=%d]",
 				getClass().getSimpleName(), messageID, ID, alpha, head, parent, parent_head);
 	}
 }

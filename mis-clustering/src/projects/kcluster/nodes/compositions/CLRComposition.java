@@ -13,7 +13,7 @@ import sinalgo.nodes.Node;
 import sinalgo.nodes.messages.Message;
 
 public class CLRComposition implements IComposition {
-	private static Logger<Node, CLRMessage> logger = new Logger<>("CLRLogger", true);
+	private static Logger<Node, CLRMessage> LOGGER = new Logger<>("CLRLogger", false);
 
 	private static final int k = 3;
 
@@ -29,30 +29,20 @@ public class CLRComposition implements IComposition {
 	}
 
 	private void actions() {
-		boolean finished = true;
 		if (ruleSetAlpha()) {
 			pCLRData.alpha = macroAlpha();
-			finished = false;
-			System.out.println("no terminal" + sinalgo.runtime.Global.currentTime);
 		}
 		if (ruleSetParentCLR()) {
 			pCLRData.parent = macroParent();
 
-			if (pCLRData.parent == pNode.ID)
+			if (pCLRData.parent == pNode.ID) {
 				pCLRData.parent_head = pCLRData.head;
-			else
+			} else {
 				pCLRData.parent_head = pCLRData.parentHeadNeighbors[BasicNode.getIndex(pNode, pCLRData.parent)];
-
-			finished = false;
-			System.out.println("no terminal" + sinalgo.runtime.Global.currentTime);
+			}
 		}
 		if (ruleSetHead()) {
 			pCLRData.head = macroHead();
-			finished = false;
-			System.out.println("no terminal" + sinalgo.runtime.Global.currentTime);
-		}
-		if (finished) {
-			System.out.println("Terminal configuration " + sinalgo.runtime.Global.currentTime + " for " + pNode);
 		}
 	}
 
@@ -60,6 +50,7 @@ public class CLRComposition implements IComposition {
 	public void handleMessage(Message aMessage) {
 		if (aMessage instanceof CLRMessage) {
 			CLRMessage wMessageCLR = (CLRMessage) aMessage;
+			LOGGER.logReceive(pNode, wMessageCLR);
 
 			// Update known data with received one
 			int index = BasicNode.getIndex(pNode, wMessageCLR.ID);
@@ -215,7 +206,7 @@ public class CLRComposition implements IComposition {
 	public void send() {
 		CLRMessage wMessageCLR = new CLRMessage(pNode.ID, pCLRData.alpha, pCLRData.head, pMISTData.parent,
 				pCLRData.parent_head);
-		logger.logSend(pNode, wMessageCLR);
+		LOGGER.logSend(pNode, wMessageCLR);
 		pNode.broadcast(wMessageCLR);
 	}
 
