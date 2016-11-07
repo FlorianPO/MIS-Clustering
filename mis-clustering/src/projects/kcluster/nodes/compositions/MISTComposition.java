@@ -89,7 +89,7 @@ public class MISTComposition implements IComposition {
 		/* Looking for a dominator of Key inferior to pNode */
 		MISTKey wKey = macroKey();
 		for (int wI = 0; wI < pMISTData.neighborsDominator.length; wI++) {
-			if (pMISTData.neighborsDominator[wI] == true && pMISTData.neighborsKey[wI].compareTo(wKey) == -1) {
+			if (pMISTData.neighborsDominator[wI] == false || pMISTData.neighborsKey[wI].compareTo(wKey) == 1) {
 				return false;
 			}
 		}
@@ -115,9 +115,9 @@ public class MISTComposition implements IComposition {
 		if (pBFSData.distance == 0) {
 			return pNode.ID;
 		}
-		int wMinIndex = -1;
-		MISTKey wMinKey = new MISTKey(Integer.MAX_VALUE, Integer.MAX_VALUE);
-		for (int wI = 0; wI < pMISTData.neighborsKey.length; wI++) {
+		int wMinIndex = 0;
+		MISTKey wMinKey = pMISTData.neighborsKey[0];
+		for (int wI = 1; wI < pMISTData.neighborsKey.length; wI++) {
 			if (this.pMISTData.dominator != pMISTData.neighborsDominator[wI]) {
 				if (wMinKey.compareTo(pMISTData.neighborsKey[wI]) == 1) {
 					wMinIndex = wI;

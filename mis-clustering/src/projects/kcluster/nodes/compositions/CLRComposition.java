@@ -37,12 +37,12 @@ public class CLRComposition implements IComposition {
 		}
 		if (ruleSetParentCLR()) {
 			pCLRData.parent = macroParent();
-			// Here
+
 			if (pCLRData.parent == pNode.ID)
 				pCLRData.parent_head = pCLRData.head;
 			else
 				pCLRData.parent_head = pCLRData.parentHeadNeighbors[BasicNode.getIndex(pNode, pCLRData.parent)];
-			//
+
 			finished = false;
 			System.out.println("no terminal" + sinalgo.runtime.Global.currentTime);
 		}
@@ -81,7 +81,6 @@ public class CLRComposition implements IComposition {
 	private int macroHead() {
 		if (macroIsClusterHead())
 			return pNode.ID;
-		System.out.println("HERE" + pCLRData.parent);
 
 		return pCLRData.parent_head;
 	}
@@ -205,7 +204,6 @@ public class CLRComposition implements IComposition {
 	}
 
 	private boolean ruleSetHead() {
-		System.out.println("JUST BEFORE");
 		return !ruleSetAlpha() && pCLRData.parent == macroParent() && pCLRData.head != macroHead();
 	}
 
