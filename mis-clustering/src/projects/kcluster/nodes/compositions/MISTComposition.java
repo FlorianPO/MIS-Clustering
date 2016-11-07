@@ -89,7 +89,7 @@ public class MISTComposition implements IComposition {
 		/* Looking for a dominator of Key inferior to pNode */
 		MISTKey wKey = macroKey();
 		for (int wI = 0; wI < pMISTData.neighborsDominator.length; wI++) {
-			if (pMISTData.neighborsDominator[wI] == false || pMISTData.neighborsKey[wI].compareTo(wKey) == 1) {
+			if (pMISTData.neighborsDominator[wI] == true && pMISTData.neighborsKey[wI].compareTo(wKey) == -1) {
 				return false;
 			}
 		}
