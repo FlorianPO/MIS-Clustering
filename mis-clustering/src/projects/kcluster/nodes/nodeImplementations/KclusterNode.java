@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import projects.kcluster.CustomGlobal;
 import projects.kcluster.models.compositions.BFSTData;
 import projects.kcluster.models.compositions.CLRData;
 import projects.kcluster.models.compositions.MISTData;
@@ -49,13 +50,41 @@ public class KclusterNode extends Node {
 
 	@Override
 	public void draw(Graphics g, PositionTransformation pt, boolean highlight) {
-		if (pCLRData.parent == ID) {
-			this.setColor(Color.RED);
-		} else {
-			this.setColor(Color.YELLOW);
-		}
+		String desc = "";
+		switch (CustomGlobal.DrawHandler.DRAW_HANDLER.current_state) {
+		case BFST:
+			if (pBFSData.parent == ID) {
+				this.setColor(Color.RED);
+			} else {
+				this.setColor(Color.YELLOW);
+			}
 
-		String desc = String.format("%d", pCLRData.alpha);
+			desc = String.format("%d : %d", ID, pBFSData.distance);
+			break;
+		case MIST:
+			if (pMISTData.parent == ID) {
+				this.setColor(Color.RED);
+			} else if (pMISTData.dominator) {
+				this.setColor(Color.BLUE);
+			} else {
+				this.setColor(Color.YELLOW);
+			}
+
+			desc = String.format("%d", ID);
+			break;
+		case CLR:
+			if (pCLRData.parent == ID) {
+				this.setColor(Color.RED);
+			} else {
+				this.setColor(Color.YELLOW);
+			}
+
+			desc = String.format("%d : %d", ID, pCLRData.alpha);
+
+			break;
+		default:
+			break;
+		}
 
 		super.drawNodeAsDiskWithText(g, pt, highlight, desc, 20, Color.black);
 	}

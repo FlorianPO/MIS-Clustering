@@ -170,7 +170,7 @@ public class MISTComposition implements IComposition {
 		int wNumberNeighbors = BasicNode.nbNeighbors(pNode);
 		int wNbNodes = Tools.getNodeList().size();
 		if (pNode.ID == 1) {
-			pBFSData.parent = 1;
+			pMISTData.parent = 1;
 			pMISTData.dominator = true;
 		} else {
 			int arc = Random.rand(wNumberNeighbors);
