@@ -65,7 +65,7 @@ public class KclusterNode extends Node {
 			if (pMISTData.parent == ID) {
 				this.setColor(Color.RED);
 			} else if (pMISTData.dominator) {
-				this.setColor(Color.BLUE);
+				this.setColor(Color.CYAN);
 			} else {
 				this.setColor(Color.YELLOW);
 			}
