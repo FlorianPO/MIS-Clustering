@@ -17,17 +17,35 @@ public class CLRComposition implements IComposition {
 
 	private static final int k = 3;
 
+	/** Node on which this composition is attached */
 	private Node pNode;
 
+	/** MIST Data handed to composition (must be read only) */
 	private MISTData pMISTData;
+	/** CLR Data manipulated */
 	private CLRData pCLRData;
 
+	/**
+	 *
+	 * @param aNode
+	 *            Node on which the composition is attached
+	 * @param aMISTData
+	 *            Data handed to compositon. This composition does not modify
+	 *            the data contained in that object
+	 * @param aCLRData
+	 *            Data to manipulate. This object will be modified by this class
+	 *
+	 */
 	public CLRComposition(Node aNode, MISTData aMISTData, CLRData aCLRData) {
 		pNode = aNode;
 		pMISTData = aMISTData;
 		pCLRData = aCLRData;
 	}
 
+	/**
+	 * Actions of the composition. Function must be called every time a message
+	 * is received
+	 */
 	private void actions() {
 		if (ruleSetAlpha()) {
 			pCLRData.alpha = macroAlpha();
@@ -63,12 +81,22 @@ public class CLRComposition implements IComposition {
 		}
 	}
 
+	/**
+	 * Using neighbors Data, will return the node's alpha value
+	 *
+	 * @return alpha value
+	 */
 	private int macroAlpha() {
 		if (macroMaxAShort() + macroMinATall() <= 2 * k - 2)
 			return macroMinATall() + 1;
 		return macroMaxAShort() + 1;
 	}
 
+	/**
+	 * Using neighbors Data, will return the node's head ID
+	 *
+	 * @return head ID
+	 */
 	private int macroHead() {
 		if (macroIsClusterHead())
 			return pNode.ID;
@@ -76,10 +104,20 @@ public class CLRComposition implements IComposition {
 		return pCLRData.parent_head;
 	}
 
+	/**
+	 * Using neighbors Data, will return if this node is cluster head
+	 *
+	 * @return true if this node is cluster head
+	 */
 	private boolean macroIsClusterHead() {
 		return pCLRData.alpha == k || (macroIsShort(pNode.ID) && pNode.ID == 1);
 	}
 
+	/**
+	 * Using neighbors Data, will return true if Node<ID>.alpha < k
+	 *
+	 * @return true if Node<ID>.alpha < k
+	 */
 	private boolean macroIsShort(int ID) {
 		int alpha;
 		if (this.pNode.ID == ID)
@@ -90,6 +128,11 @@ public class CLRComposition implements IComposition {
 		return alpha < k;
 	}
 
+	/**
+	 * Using neighbors Data, will return true if Node<ID>.alpha >= k
+	 *
+	 * @return true if Node<ID>.alpha >= k
+	 */
 	private boolean macroIsTall(int ID) {
 		int alpha;
 		if (this.pNode.ID == ID)
@@ -99,6 +142,12 @@ public class CLRComposition implements IComposition {
 		return alpha >= k;
 	}
 
+	/**
+	 * Using neighbors Data, will return the max alpha value of
+	 * shortChildrenList
+	 *
+	 * @return max alpha value
+	 */
 	private int macroMaxAShort() {
 		List<Integer> short_list = macroShortChildren();
 
@@ -115,6 +164,11 @@ public class CLRComposition implements IComposition {
 		return max_alpha;
 	}
 
+	/**
+	 * Using neighbors Data, will return the min alpha value of tallChildrenList
+	 *
+	 * @return max alpha value
+	 */
 	private int macroMinATall() {
 		List<Integer> tall_list = macroTallChildren();
 
@@ -131,6 +185,12 @@ public class CLRComposition implements IComposition {
 		return min_alpha;
 	}
 
+	/**
+	 * Using neighbors Data, will return the min Node's ID (total order) of
+	 * tallChildrenList
+	 *
+	 * @return max alpha value
+	 */
 	private int macroMinIdMinATall() {
 		List<Integer> tall_list = macroTallChildren();
 
@@ -149,6 +209,11 @@ public class CLRComposition implements IComposition {
 		return min_ID;
 	}
 
+	/**
+	 * Using neighbors Data, will return the node's parent ID
+	 *
+	 * @return parent ID
+	 */
 	private int macroParent() {
 		if (macroIsClusterHead())
 			return pNode.ID;
@@ -159,6 +224,11 @@ public class CLRComposition implements IComposition {
 		return macroMinIdMinATall();
 	}
 
+	/**
+	 * Using neighbors Data, will return shortChildrenList
+	 *
+	 * @return shortChildrenList
+	 */
 	private List<Integer> macroShortChildren() {
 		List<Integer> result_list = new ArrayList<>();
 
@@ -172,6 +242,11 @@ public class CLRComposition implements IComposition {
 		return result_list;
 	}
 
+	/**
+	 * Using neighbors Data, will return tallChildrenList
+	 *
+	 * @return tallChildrenList
+	 */
 	private List<Integer> macroTallChildren() {
 		List<Integer> result_list = new ArrayList<>();
 
@@ -190,14 +265,29 @@ public class CLRComposition implements IComposition {
 		// TODO
 	}
 
+	/**
+	 * Guard of rule setAlpha of the CLR Composition
+	 *
+	 * @return true if rule is enabled. false otherwise
+	 */
 	private boolean ruleSetAlpha() {
 		return pCLRData.alpha != macroAlpha();
 	}
 
+	/**
+	 * Guard of rule setHead of the CLR Composition
+	 *
+	 * @return true if rule is enabled. false otherwise
+	 */
 	private boolean ruleSetHead() {
 		return !ruleSetAlpha() && pCLRData.parent == macroParent() && pCLRData.head != macroHead();
 	}
 
+	/**
+	 * Guard of rule setParentCLR of the CLR Composition
+	 *
+	 * @return true if rule is enabled. false otherwise
+	 */
 	private boolean ruleSetParentCLR() {
 		return !ruleSetAlpha() && pCLRData.parent != macroParent();
 	}
